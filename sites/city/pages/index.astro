@@ -1,8 +1,6 @@
 ---
 import Base from '../../../shared/layouts/Base.astro';
-import Wave from '../../../shared/components/Wave.astro';
-import WalkReport from '../../../shared/components/WalkReport.astro';
-import Trust from '../../../shared/components/Trust.astro';
+import PhotoHero from '../../../shared/components/PhotoHero.astro';
 import ServiceCards from '../../../shared/components/ServiceCards.astro';
 import Steps from '../../../shared/components/Steps.astro';
 import Reviews from '../../../shared/components/Reviews.astro';
@@ -21,32 +19,25 @@ const walkPlace = c.key === 'vb' ? 'Oceanfront' : 'Folly Beach';
 <Base
   title={`Dog Walking & Pet Sitting in ${c.name}, ${c.state} | Sitters by the Sea`}
   description={`Bonded, insured dog walkers and pet sitters in ${c.name}, ${c.state}. Walks, drop-ins, overnights and live-in care across ${c.areas.slice(0, 4).map((a) => a.name).join(', ')} and more. 20% military discount.`}
-  image={c.heroImage}
+  image={c.heroBg.src}
   schema={[localBusiness(c), website(c.key)]}
 >
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero__copy">
-        <span class="eyebrow">{c.heroTag}</span>
-        <h1>Dog walking &amp; pet sitting in <em>{c.name}</em></h1>
-        <p class="lead">{c.heroLine}</p>
-        <div class="btn-row">
-          <a class="btn btn--red" href={bookHref()}>Book in {c.name}</a>
-          <a class="btn btn--outline" href={`tel:${c.phoneHref}`}><Icon name="phone" size={16} /> {c.phone}</a>
-        </div>
-        <Trust />
-      </div>
-      <div class="hero__media">
-        <img class="hero__sun" src="/images/brand/sun.png" alt="" width="175" height="166" />
-        <div class="hero__photo">
-          <img src={c.heroImage} alt={c.heroAlt} width="480" height="480" fetchpriority="high" />
-        </div>
-        <img class="hero__cloud" src="/images/brand/cloud.png" alt="" width="150" height="150" />
-        <div class="hero__report"><WalkReport place={walkPlace} /></div>
-      </div>
-    </div>
-    <Wave />
-  </section>
+  <PhotoHero
+    image={c.heroBg.src}
+    alt={c.heroBg.alt}
+    width={c.heroBg.width}
+    height={c.heroBg.height}
+    position={c.heroBg.position}
+    eyebrow={c.heroTag}
+    lead={c.heroLine}
+    reportPlace={walkPlace}
+  >
+    <Fragment slot="title">Dog walking &amp; pet sitting in <em>{c.name}</em></Fragment>
+    <Fragment slot="actions">
+      <a class="btn btn--red" href={bookHref()}>Book in {c.name}</a>
+      <a class="btn btn--outline" href={`tel:${c.phoneHref}`}><Icon name="phone" size={16} /> {c.phone}</a>
+    </Fragment>
+  </PhotoHero>
 
   <section class="section">
     <div class="wrap stack-lg">

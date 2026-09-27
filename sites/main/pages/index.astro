@@ -1,8 +1,6 @@
 ---
 import Base from '../../../shared/layouts/Base.astro';
-import Wave from '../../../shared/components/Wave.astro';
-import WalkReport from '../../../shared/components/WalkReport.astro';
-import Trust from '../../../shared/components/Trust.astro';
+import PhotoHero from '../../../shared/components/PhotoHero.astro';
 import ServiceCards from '../../../shared/components/ServiceCards.astro';
 import Steps from '../../../shared/components/Steps.astro';
 import Reviews from '../../../shared/components/Reviews.astro';
@@ -25,24 +23,21 @@ const coastImages = {
   image="/images/photos/dog-dunes.jpg"
   schema={[organization(), website('main')]}
 >
-  <section class="hero hero--photo">
-    <img class="hero__bg" src="/images/photos/dog-dunes.jpg" alt="A happy tan dog in a red collar standing on a sand dune above the beach under a blue sky" width="799" height="599" fetchpriority="high" />
-    <div class="hero__shade" aria-hidden="true"></div>
-    <div class="wrap">
-      <div class="hero__copy">
-        <span class="eyebrow">Virginia Beach, VA · Charleston, SC</span>
-        <h1>Dog walking &amp; pet sitting, <em>with a report card</em> every visit.</h1>
-        <p class="lead">Locally owned since 2019. Our sitters walk, feed and care for your pets like family, then send photos and a full report so you can enjoy your day.</p>
-        <div class="btn-row">
-          <a class="btn btn--red" href={bookHref()}>Book a meet &amp; greet</a>
-          <a class="btn btn--outline" href="#coasts">Find your city</a>
-        </div>
-        <Trust />
-      </div>
-      <div class="hero__aside"><WalkReport place="Dune walk" /></div>
-    </div>
-    <Wave />
-  </section>
+  <PhotoHero
+    image="/images/photos/dog-dunes.jpg"
+    alt="A happy tan dog in a red collar standing on a sand dune above the beach under a blue sky"
+    width={799}
+    height={599}
+    eyebrow="Virginia Beach, VA · Charleston, SC"
+    lead="Locally owned since 2019. Our sitters walk, feed and care for your pets like family, then send photos and a full report so you can enjoy your day."
+    reportPlace="Dune walk"
+  >
+    <Fragment slot="title">Dog walking &amp; pet sitting, <em>with a report card</em> every visit.</Fragment>
+    <Fragment slot="actions">
+      <a class="btn btn--red" href={bookHref()}>Book a meet &amp; greet</a>
+      <a class="btn btn--outline" href="#coasts">Find your city</a>
+    </Fragment>
+  </PhotoHero>
 
   <section class="section" id="coasts">
     <div class="wrap stack-lg">

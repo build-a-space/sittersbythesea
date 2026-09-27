@@ -9,6 +9,8 @@ export const cities = {
     geo: { lat: 36.8529, lng: -75.978 },
     heroTag: 'Oceanfront to Sandbridge',
     heroLine: 'Bonded, insured and pet first aid trained sitters from the Oceanfront to Sandbridge. You get photos and a report after every visit.',
+    // Full-width hero photo. Keep the subject on the right; text sits on the left.
+    heroBg: { src: '/images/photos/dog-dunes.jpg', alt: 'A happy tan dog in a red collar on a sand dune above the beach', width: 799, height: 599, position: '62% 45%' },
     heroImage: '/images/photos/dog-beach-sunset.jpg',
     heroAlt: 'A dog in a blue harness on a Virginia Beach shore at sunrise',
     military: {
@@ -35,6 +37,8 @@ export const cities = {
     geo: { lat: 32.7765, lng: -79.9311 },
     heroTag: 'Downtown to Folly Beach',
     heroLine: 'Bonded, insured and pet first aid trained sitters from the peninsula to the islands. You get photos and a report after every visit.',
+    // Full-width hero photo. TODO: swap in a Charleston photo with the subject on the right.
+    heroBg: { src: '/images/photos/dog-dunes.jpg', alt: 'A happy tan dog in a red collar on a sand dune above the beach', width: 799, height: 599, position: '62% 45%' },
     heroImage: '/images/photos/dog-marsh.jpg',
     heroAlt: 'A happy white and brown dog sitting in the grass beside a Lowcountry marsh',
     military: {

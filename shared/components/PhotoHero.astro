@@ -1,0 +1,24 @@
+---
+// Full-width photo hero. Text sits on the left over a soft fade, so pick
+// photos whose subject is on the right half of the frame.
+import Wave from './Wave.astro';
+import WalkReport from './WalkReport.astro';
+import Trust from './Trust.astro';
+interface Props { image: string; alt: string; width: number; height: number; position?: string; eyebrow: string; lead: string; reportPlace?: string }
+const { image, alt, width, height, position = '62% 45%', eyebrow, lead, reportPlace } = Astro.props;
+---
+<section class="hero hero--photo">
+  <img class="hero__bg" src={image} alt={alt} width={width} height={height} fetchpriority="high" style={`object-position:${position}`} />
+  <div class="hero__shade" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero__copy">
+      <span class="eyebrow">{eyebrow}</span>
+      <h1><slot name="title" /></h1>
+      <p class="lead">{lead}</p>
+      <div class="btn-row"><slot name="actions" /></div>
+      <Trust />
+    </div>
+    <div class="hero__aside"><WalkReport place={reportPlace} /></div>
+  </div>
+  <Wave />
+</section>
