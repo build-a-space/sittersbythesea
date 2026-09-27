@@ -12,7 +12,8 @@
     "dev:chs": "SITE=chs astro dev",
     "build": "node scripts/build-all.js",
     "start": "node server.js",
-    "demo": "node scripts/build-demo.js"
+    "demo": "node scripts/build-demo.js",
+    "build:netlify": "node scripts/netlify-build.js"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

@@ -16,5 +16,5 @@ export default defineConfig({
   trailingSlash: 'always',
   build: { format: 'directory', inlineStylesheets: 'always' },
   server: { port: site.port },
-  integrations: [sitemap({ filter: (page) => !page.includes('/404') })],
+  integrations: [sitemap({ filter: (page) => !page.includes('/404') && !page.includes('/thanks/') })],
 });

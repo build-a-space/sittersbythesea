@@ -1,0 +1,16 @@
+---
+import Base from '../../../../shared/layouts/Base.astro';
+import PageHead from '../../../../shared/components/PageHead.astro';
+import { href } from '../../../../shared/lib/site.js';
+import { business } from '../../../../shared/data/business.js';
+---
+<Base title="Thanks! | Sitters by the Sea" description="We received your request." noindex>
+  <PageHead
+    eyebrow="Request received"
+    title="Thanks! We'll be in touch soon."
+    lead={`We reply within one business day. Need us sooner? Call or text ${business.phone}.`}
+    crumbs={[{ name: 'Home', url: href('/') }, { name: 'Contact', url: href('/contact/') }, { name: 'Thanks' }]}
+  >
+    <div class="btn-row"><a class="btn btn--red" href={href('/')}>Back to the homepage</a></div>
+  </PageHead>
+</Base>

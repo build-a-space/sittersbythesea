@@ -25,6 +25,10 @@ SITE_MODE=local npm run build && npm start
 npm run demo         # one-folder preview of all three sites in demo/site
 ```
 
+## Deploying
+
+The sites are hosted on Netlify as three sites from this one repo. See [docs/netlify-setup.md](docs/netlify-setup.md).
+
 ## Where things live
 
 - `shared/data/`: business facts, services, cities and neighborhoods, domains. Most content edits happen here.
@@ -32,7 +36,8 @@ npm run demo         # one-folder preview of all three sites in demo/site
 - `sites/main/pages/`: main site pages.
 - `sites/city/pages/`: city pages, built once for each city (`SITE=vb` or `SITE=chs`).
 - `public/images/`: logo, brand art and photos.
-- `server.js`: a small Node server that picks the site by hostname, redirects old WordPress URLs and handles the contact form.
+- `server.js`: an optional Node server for local previews or self-hosting. It picks the site by hostname, redirects old WordPress URLs and handles the contact form.
+- `netlify.toml`, `scripts/netlify-build.js`: the Netlify build. Each Netlify site sets `SITE`.
 - `docs/site-plan.html`: the site plan and design direction.
 
 ## SEO built in
@@ -47,5 +52,5 @@ npm run demo         # one-folder preview of all three sites in demo/site
 
 - Add the Time To Pet portal link (`shared/data/business.js` → `timeToPet`)
 - Confirm the Charleston phone number (`shared/data/cities.js`)
-- Connect the contact form to email (`server.js` → `handleContact`)
+- Turn on Netlify Forms email notifications (docs/netlify-setup.md)
 - Swap in full-size photos

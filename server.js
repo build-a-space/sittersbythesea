@@ -5,6 +5,7 @@
 import { createServer } from 'node:http';
 import { createReadStream, existsSync, statSync } from 'node:fs';
 import path from 'node:path';
+import { REDIRECTS } from './shared/data/redirects.js';
 
 const PORT = Number(process.env.PORT) || 8080;
 const DIST = path.resolve(new URL('.', import.meta.url).pathname, 'dist');
@@ -17,16 +18,6 @@ const TYPES = {
   '.woff2': 'font/woff2',
 };
 
-// Old WordPress URLs -> new homes, so existing rankings and bookmarks carry over.
-const REDIRECTS = {
-  main: {
-    '/virginia-beach-dog-walking-pet-sitting/': { site: 'vb', path: '/' },
-    '/charleston-dog-walking-pet-sitting/': { site: 'chs', path: '/' },
-    '/contact-us/': { site: 'main', path: '/contact/' },
-    '/about-us/': { site: 'main', path: '/about/' },
-    '/testimonials/': { site: 'main', path: '/reviews/' },
-  },
-};
 
 function siteFor(host = '') {
   const h = host.split(':')[0].toLowerCase();

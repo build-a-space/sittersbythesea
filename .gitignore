@@ -4,3 +4,4 @@ demo/
 .astro/
 .DS_Store
 dist-demo/
+netlify-publish/

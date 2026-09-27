@@ -1,0 +1,22 @@
+# One repo, three Netlify sites. In each site's settings, set the environment
+# variable SITE to main, vb or chs (see docs/netlify-setup.md).
+
+[build]
+  command = "npm run build:netlify"
+  publish = "netlify-publish"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
