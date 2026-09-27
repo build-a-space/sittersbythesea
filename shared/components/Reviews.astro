@@ -1,0 +1,22 @@
+---
+import { reviews } from '../data/business.js';
+import Icon from './Icon.astro';
+const [feature, ...rest] = reviews;
+const stars = [1, 2, 3, 4, 5];
+---
+<div class="reviews">
+  <figure class="review review--feature">
+    <div class="stars" role="img" aria-label="5 out of 5 stars">{stars.map(() => <Icon name="star" size={20} />)}</div>
+    <blockquote><p>{feature.text}</p></blockquote>
+    <figcaption><span class="review__avatar" aria-hidden="true">{feature.name[0]}</span><span class="review__who"><b>{feature.name}</b><span>{feature.place}</span></span></figcaption>
+  </figure>
+  <div class="reviews__side">
+    {rest.map((r) => (
+      <figure class="review">
+        <div class="stars" role="img" aria-label="5 out of 5 stars">{stars.map(() => <Icon name="star" size={16} />)}</div>
+        <blockquote><p>{r.text}</p></blockquote>
+        <figcaption><span class="review__avatar" aria-hidden="true">{r.name[0]}</span><span class="review__who"><b>{r.name}</b><span>{r.place}</span></span></figcaption>
+      </figure>
+    ))}
+  </div>
+</div>

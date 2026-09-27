@@ -1,0 +1,11 @@
+---
+import { steps } from '../data/business.js';
+---
+<ol class="steps">
+  {steps.map((s) => (
+    <li class="step">
+      <h3>{s.title}</h3>
+      <p>{s.body}</p>
+    </li>
+  ))}
+</ol>

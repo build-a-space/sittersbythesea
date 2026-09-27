@@ -1,0 +1,20 @@
+---
+import Wave from './Wave.astro';
+interface Props { eyebrow: string; title: string; lead?: string; crumbs: { name: string; url?: string }[] }
+const { eyebrow, title, lead, crumbs } = Astro.props;
+---
+<section class="pagehead">
+  <img class="pagehead__cloud" src="/images/brand/cloud.png" alt="" width="150" height="150" />
+  <div class="wrap">
+    <nav aria-label="Breadcrumb">
+      <ol class="crumbs">
+        {crumbs.map((c) => <li>{c.url ? <a href={c.url}>{c.name}</a> : <span aria-current="page">{c.name}</span>}</li>)}
+      </ol>
+    </nav>
+    <span class="eyebrow">{eyebrow}</span>
+    <h1>{title}</h1>
+    {lead && <p class="lead">{lead}</p>}
+    <slot />
+  </div>
+  <Wave />
+</section>

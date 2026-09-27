@@ -1,0 +1,21 @@
+---
+import { sampleReport as r } from '../data/business.js';
+import Icon from './Icon.astro';
+interface Props { place?: string }
+const place = Astro.props.place ?? r.place;
+---
+<div class="report" aria-label="Example walk report">
+  <div class="report__head">
+    <span class="report__title">{r.pet}'s walk report</span>
+    <span class="report__meta">{r.day} · {r.time} · {place}</span>
+  </div>
+  <div class="report__stats">
+    <div class="report__stat"><b>{r.minutes} min</b><span>Walk</span></div>
+    <div class="report__stat"><b>{r.miles} mi</b><span>Distance</span></div>
+    <div class="report__stat"><b>{r.mood}</b><span>Mood</span></div>
+  </div>
+  <ul class="report__checks">
+    {r.checks.map((c) => <li><Icon name="check" size={11} />{c}</li>)}
+  </ul>
+  <p class="report__note">"{r.note}"</p>
+</div>

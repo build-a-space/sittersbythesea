@@ -1,0 +1,54 @@
+---
+import { SITE_KEY, city, link } from '../lib/site.js';
+import { business } from '../data/business.js';
+import { cities } from '../data/cities.js';
+import Icon from './Icon.astro';
+const year = new Date().getFullYear();
+const phone = city?.phone ?? business.phone;
+const phoneHref = city?.phoneHref ?? business.phoneHref;
+---
+<footer class="footer">
+  <img class="footer__cloud" src="/images/brand/cloud.png" alt="" width="150" height="150" loading="lazy" />
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="/images/brand/logo.png" alt="Sitters by the Sea" width="500" height="159" loading="lazy" />
+        <p>Dog walking and pet sitting in Virginia Beach, VA and Charleston, SC. Locally owned since {business.founded}. Bonded, insured and pet first aid trained.</p>
+        <div class="social">
+          <a href={business.facebook} aria-label="Sitters by the Sea on Facebook"><Icon name="facebook" /></a>
+        </div>
+      </div>
+      <div>
+        <h2>Locations</h2>
+        <ul>
+          <li><a href={link('vb')}>Virginia Beach, VA</a></li>
+          <li><a href={link('chs')}>Charleston, SC</a></li>
+          {Object.values(cities).map((c) => <li><a href={link(c.key, '/service-areas/')}>{c.name} service areas</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h2>Company</h2>
+        <ul>
+          <li><a href={link(SITE_KEY === 'main' ? 'main' : SITE_KEY, '/services/')}>Services</a></li>
+          <li><a href={link('main', '/about/')}>About Joee &amp; the team</a></li>
+          <li><a href={link('main', '/reviews/')}>Reviews</a></li>
+          <li><a href={link('main', '/contact/')}>Contact</a></li>
+          <li><a href={link('main', '/contact/#book')}>Join our team</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Contact</h2>
+        <ul>
+          <li><a href={`tel:${phoneHref}`}>{phone}</a></li>
+          <li><a href={`mailto:${business.email}`}>{business.email}</a></li>
+          <li>Office: {business.officeHours}</li>
+          <li>Pet sitting: {business.sittingHours}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© {year} Sitters by the Sea. All rights reserved.</span>
+      <span>{business.tagline}</span>
+    </div>
+  </div>
+</footer>

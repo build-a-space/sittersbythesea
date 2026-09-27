@@ -1,0 +1,17 @@
+---
+import { services } from '../data/services.js';
+import Icon from './Icon.astro';
+interface Props { base: string }
+const { base } = Astro.props;
+const core = services.filter((s) => s.core);
+---
+<div class="cards">
+  {core.map((s) => (
+    <article class="card">
+      <span class="card__label">{s.label}</span>
+      <h3>{s.name}</h3>
+      <p>{s.short}</p>
+      <a class="textlink" href={`${base}#${s.id}`}>Details <span class="sr-only">about {s.name}</span><Icon name="arrow" size={16} /></a>
+    </article>
+  ))}
+</div>

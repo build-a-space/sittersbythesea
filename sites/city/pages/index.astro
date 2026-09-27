@@ -1,0 +1,109 @@
+---
+import Base from '../../../shared/layouts/Base.astro';
+import Wave from '../../../shared/components/Wave.astro';
+import WalkReport from '../../../shared/components/WalkReport.astro';
+import Trust from '../../../shared/components/Trust.astro';
+import ServiceCards from '../../../shared/components/ServiceCards.astro';
+import Steps from '../../../shared/components/Steps.astro';
+import Reviews from '../../../shared/components/Reviews.astro';
+import Badges from '../../../shared/components/Badges.astro';
+import Military from '../../../shared/components/Military.astro';
+import Cta from '../../../shared/components/Cta.astro';
+import Icon from '../../../shared/components/Icon.astro';
+import { city, href, link, bookHref } from '../../../shared/lib/site.js';
+import { localBusiness, website } from '../../../shared/lib/schema.js';
+
+const c = city;
+const otherKey = c.key === 'vb' ? 'chs' : 'vb';
+const otherName = c.key === 'vb' ? 'Charleston, SC' : 'Virginia Beach, VA';
+const walkPlace = c.key === 'vb' ? 'Oceanfront' : 'Folly Beach';
+---
+<Base
+  title={`Dog Walking & Pet Sitting in ${c.name}, ${c.state} | Sitters by the Sea`}
+  description={`Bonded, insured dog walkers and pet sitters in ${c.name}, ${c.state}. Walks, drop-ins, overnights and live-in care across ${c.areas.slice(0, 4).map((a) => a.name).join(', ')} and more. 20% military discount.`}
+  image={c.heroImage}
+  schema={[localBusiness(c), website(c.key)]}
+>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero__copy">
+        <span class="eyebrow">{c.heroTag}</span>
+        <h1>Dog walking &amp; pet sitting in <em>{c.name}</em></h1>
+        <p class="lead">{c.heroLine}</p>
+        <div class="btn-row">
+          <a class="btn btn--red" href={bookHref()}>Book in {c.name}</a>
+          <a class="btn btn--outline" href={`tel:${c.phoneHref}`}><Icon name="phone" size={16} /> {c.phone}</a>
+        </div>
+        <Trust />
+      </div>
+      <div class="hero__media">
+        <img class="hero__sun" src="/images/brand/sun.png" alt="" width="175" height="166" />
+        <div class="hero__photo">
+          <img src={c.heroImage} alt={c.heroAlt} width="480" height="480" fetchpriority="high" />
+        </div>
+        <img class="hero__cloud" src="/images/brand/cloud.png" alt="" width="150" height="150" />
+        <div class="hero__report"><WalkReport place={walkPlace} /></div>
+      </div>
+    </div>
+    <Wave />
+  </section>
+
+  <section class="section">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">{c.name} services</span>
+        <h2>Care for every schedule</h2>
+        <p class="lead">Walks, visits, overnights and live-in care, all with photos and a report after every visit.</p>
+      </div>
+      <ServiceCards base={href('/services/')} />
+    </div>
+  </section>
+
+  <section class="section section--accent">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">Service areas</span>
+        <h2>Where we walk in {c.name}</h2>
+        <p class="lead">Local sitters in these neighborhoods. Just outside them? Call us and we'll let you know.</p>
+      </div>
+      <ul class="chips">
+        {c.areas.map((a) => <li><a href={href(`/service-areas/#${a.id}`)}>{a.name}</a></li>)}
+      </ul>
+      <div><a class="textlink" href={href('/service-areas/')}>See all {c.name} service areas <Icon name="arrow" size={16} /></a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap"><Military title={c.military.title} body={c.military.body} /></div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>Getting started is quick and easy</h2>
+      </div>
+      <Steps />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">Reviews</span>
+        <h2>What pet owners say</h2>
+      </div>
+      <Reviews />
+      <Badges />
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px">
+      <p class="lead" style="color:var(--navy)">Also looking for care in <strong>{otherName}</strong>?</p>
+      <a class="textlink" href={link(otherKey)}>Visit our {otherName} site <Icon name="arrow" size={16} /></a>
+    </div>
+  </section>
+
+  <Cta title={`Book your ${c.name} meet & greet`} phone={c.phone} phoneHref={c.phoneHref} />
+</Base>

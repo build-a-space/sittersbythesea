@@ -1,0 +1,24 @@
+---
+import { bookHref } from '../lib/site.js';
+import { business } from '../data/business.js';
+interface Props { title?: string; body?: string; phone?: string; phoneHref?: string }
+const {
+  title = 'Going out of town? Book your meet & greet.',
+  body = 'Tell us about your pets and your dates. We will set up a free meet & greet with your sitter before the first visit.',
+  phone = business.phone,
+  phoneHref = business.phoneHref,
+} = Astro.props;
+---
+<section class="cta">
+  <img class="cta__sun" src="/images/brand/sun.png" alt="" width="175" height="166" loading="lazy" />
+  <div class="wrap">
+    <div>
+      <h2>{title}</h2>
+      <p>{body}</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn--red" href={bookHref()}>Book a meet &amp; greet</a>
+      <a class="btn btn--outline" href={`tel:${phoneHref}`}>Call {phone}</a>
+    </div>
+  </div>
+</section>

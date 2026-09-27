@@ -1,0 +1,48 @@
+---
+import Base from '../../../shared/layouts/Base.astro';
+import PageHead from '../../../shared/components/PageHead.astro';
+import ServiceList from '../../../shared/components/ServiceList.astro';
+import Military from '../../../shared/components/Military.astro';
+import Faq from '../../../shared/components/Faq.astro';
+import Cta from '../../../shared/components/Cta.astro';
+import { city, href } from '../../../shared/lib/site.js';
+import { faqPage } from '../../../shared/lib/schema.js';
+import { faqs } from '../../../shared/data/services.js';
+import { business } from '../../../shared/data/business.js';
+
+const c = city;
+---
+<Base
+  title={`Pet Sitting & Dog Walking Services in ${c.name}, ${c.state} | Sitters by the Sea`}
+  description={`Dog walks, drop-in visits, overnight pet sitting, live-in 24/7 care and pet taxi in ${c.name}, ${c.state}. Bonded, insured and pet first aid trained.`}
+  image={c.heroImage}
+  schema={[faqPage(faqs)]}
+  crumbs={[{ name: c.name, path: '/' }, { name: 'Services', path: '/services/' }]}
+>
+  <PageHead
+    eyebrow={`${c.name}, ${c.state}`}
+    title={`Pet sitting & dog walking services in ${c.name}`}
+    lead={`Pet sitting ${business.sittingHours.toLowerCase()}. Every visit ends with photos and a report.`}
+    crumbs={[{ name: c.name, url: href('/') }, { name: 'Services' }]}
+  />
+
+  <section class="section">
+    <div class="wrap"><ServiceList cityName={c.name} /></div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap"><Military title={c.military.title} body={c.military.body} /></div>
+  </section>
+
+  <section class="section">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">Questions</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <Faq />
+    </div>
+  </section>
+
+  <Cta title={`Book your ${c.name} meet & greet`} phone={c.phone} phoneHref={c.phoneHref} />
+</Base>

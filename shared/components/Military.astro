@@ -1,0 +1,13 @@
+---
+import { bookHref } from '../lib/site.js';
+interface Props { title: string; body: string }
+const { title, body } = Astro.props;
+---
+<div class="military">
+  <div class="military__pct">20%<small>Military discount</small></div>
+  <div class="stack">
+    <h2 style="font-size:clamp(1.5rem,2.6vw,2rem)">{title}</h2>
+    <p>{body}</p>
+  </div>
+  <a class="btn btn--white" href={bookHref()}>Claim your discount</a>
+</div>

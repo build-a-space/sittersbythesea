@@ -1,0 +1,111 @@
+---
+import Base from '../../../shared/layouts/Base.astro';
+import Wave from '../../../shared/components/Wave.astro';
+import WalkReport from '../../../shared/components/WalkReport.astro';
+import Trust from '../../../shared/components/Trust.astro';
+import ServiceCards from '../../../shared/components/ServiceCards.astro';
+import Steps from '../../../shared/components/Steps.astro';
+import Reviews from '../../../shared/components/Reviews.astro';
+import Badges from '../../../shared/components/Badges.astro';
+import Cta from '../../../shared/components/Cta.astro';
+import Icon from '../../../shared/components/Icon.astro';
+import { href, link, bookHref } from '../../../shared/lib/site.js';
+import { organization, website } from '../../../shared/lib/schema.js';
+import { cities } from '../../../shared/data/cities.js';
+import { SITES } from '../../../shared/data/sites.js';
+
+const coastImages = {
+  vb: { src: '/images/photos/dog-beach-sunset.jpg', alt: 'Dog on a Virginia Beach shore at sunrise' },
+  chs: { src: '/images/photos/dog-marsh.jpg', alt: 'Dog sitting beside a Lowcountry marsh' },
+};
+---
+<Base
+  title="Sitters by the Sea | Dog Walking & Pet Sitting in Virginia Beach & Charleston"
+  description="Bonded, insured and pet first aid trained dog walkers and pet sitters in Virginia Beach, VA and Charleston, SC. Walks, drop-ins, overnights and live-in care, with photos and a report after every visit."
+  schema={[organization(), website('main')]}
+>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero__copy">
+        <span class="eyebrow">Virginia Beach, VA · Charleston, SC</span>
+        <h1>Dog walking &amp; pet sitting, <em>with a report card</em> every visit.</h1>
+        <p class="lead">Locally owned since 2019. Our sitters walk, feed and care for your pets like family, then send photos and a full report so you can enjoy your day.</p>
+        <div class="btn-row">
+          <a class="btn btn--red" href={bookHref()}>Book a meet &amp; greet</a>
+          <a class="btn btn--outline" href="#coasts">Find your city</a>
+        </div>
+        <Trust />
+      </div>
+      <div class="hero__media">
+        <img class="hero__sun" src="/images/brand/sun.png" alt="" width="175" height="166" />
+        <div class="hero__photo">
+          <img src="/images/photos/dog-beach-sunset.jpg" alt="A dog in a blue harness on the beach at sunrise" width="480" height="480" fetchpriority="high" />
+        </div>
+        <img class="hero__cloud" src="/images/brand/cloud.png" alt="" width="150" height="150" />
+        <div class="hero__report"><WalkReport /></div>
+      </div>
+    </div>
+    <Wave />
+  </section>
+
+  <section class="section" id="coasts">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">Two coasts, one standard of care</span>
+        <h2>Choose your city</h2>
+        <p class="lead">Each city has its own local team and its own site with services, neighborhoods and booking.</p>
+      </div>
+      <div class="coasts">
+        {Object.values(cities).map((c) => (
+          <a class={`coast coast--${c.key}`} href={link(c.key)}>
+            <div class="coast__img"><img src={coastImages[c.key].src} alt={coastImages[c.key].alt} width="480" height="480" loading="lazy" /></div>
+            <div class="coast__body">
+              <span class="coast__host">{SITES[c.key].host}</span>
+              <h3>{c.name}, {c.state}</h3>
+              <p class="coast__areas">{c.areas.map((a) => a.name).join(' · ')}</p>
+              <span class="textlink">Visit {c.name} <Icon name="arrow" size={16} /></span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">Services</span>
+        <h2>Care for every schedule</h2>
+        <p class="lead">From a quick midday walk to a sitter who stays for your whole trip.</p>
+      </div>
+      <ServiceCards base={href('/services/')} />
+      <div><a class="textlink" href={href('/services/')}>See all services, including half-day visits and pet taxi <Icon name="arrow" size={16} /></a></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>Getting started is quick and easy</h2>
+      </div>
+      <Steps />
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">Reviews</span>
+        <h2>What our clients say</h2>
+      </div>
+      <Reviews />
+      <div class="btn-row">
+        <a class="btn btn--outline btn--sm" href={href('/reviews/')}>Read more reviews</a>
+      </div>
+      <Badges />
+    </div>
+  </section>
+
+  <Cta />
+</Base>

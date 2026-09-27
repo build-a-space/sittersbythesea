@@ -1,0 +1,91 @@
+---
+import Base from '../../../shared/layouts/Base.astro';
+import PageHead from '../../../shared/components/PageHead.astro';
+import Badges from '../../../shared/components/Badges.astro';
+import Steps from '../../../shared/components/Steps.astro';
+import Cta from '../../../shared/components/Cta.astro';
+import Icon from '../../../shared/components/Icon.astro';
+import { href, link } from '../../../shared/lib/site.js';
+import { business } from '../../../shared/data/business.js';
+---
+<Base
+  title="About Sitters by the Sea | Locally Owned Pet Sitters Since 2019"
+  description="Meet Sitters by the Sea: a locally owned dog walking and pet sitting business founded by Joee Russo-Duffy in Virginia Beach in 2019, now also serving Charleston, SC."
+  crumbs={[{ name: 'Home', path: '/' }, { name: 'About', path: '/about/' }]}
+  image="/images/photos/dog-marsh.jpg"
+>
+  <PageHead
+    eyebrow="About us"
+    title="Locally owned pet sitters on two coasts"
+    lead="Sitters by the Sea started in Virginia Beach in 2019 and now cares for pets across the Virginia Beach oceanfront and the Charleston Lowcountry."
+    crumbs={[{ name: 'Home', url: href('/') }, { name: 'About' }]}
+  />
+
+  <section class="section">
+    <div class="wrap split">
+      <div class="split__media"><img src="/images/photos/dog-marsh.jpg" alt="A smiling dog sitting in the grass by the marsh" width="400" height="450" loading="lazy" /></div>
+      <div class="stack">
+        <span class="eyebrow">Our story</span>
+        <h2>Started by an animal lover in Virginia Beach</h2>
+        <div class="prose">
+          <p>{business.owner} founded Sitters by the Sea in {business.founded} to give Virginia Beach pet owners care they could count on. Clients noticed the difference quickly: the extra time spent with their pets, and the detailed reports and photos sent after every visit.</p>
+          <p>Word spread from the Oceanfront to Sandbridge, and Sitters by the Sea grew into a team of walkers and sitters. Today we also serve Charleston, SC, from downtown to Folly Beach, Kiawah and Isle of Palms.</p>
+          <p>Our tagline says it all: <strong>{business.tagline}</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">Why families trust us</span>
+        <h2>Professional care you can check on</h2>
+      </div>
+      <div class="panels">
+        <div class="panel">
+          <h3>Bonded, insured and trained</h3>
+          <p>We are bonded and insured, and our sitters are trained in pet first aid.</p>
+        </div>
+        <div class="panel">
+          <h3>A report after every visit</h3>
+          <p>Photos plus notes on walks, bathroom breaks, meals, water and mood, sent through the Time To Pet app.</p>
+        </div>
+        <div class="panel">
+          <h3>Local sitters</h3>
+          <p>Your sitter lives nearby and knows the area, from beach access rules to the best shady walking routes.</p>
+        </div>
+      </div>
+      <Badges />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">How it works</span>
+        <h2>From first call to first walk</h2>
+      </div>
+      <Steps />
+    </div>
+  </section>
+
+  <section class="section section--accent">
+    <div class="wrap split split--flip">
+      <div class="split__media"><img src="/images/photos/dog-beach-sunset.jpg" alt="Dog on the beach at sunrise" width="480" height="480" loading="lazy" /></div>
+      <div class="stack">
+        <span class="eyebrow">Careers</span>
+        <h2>Love animals? Join our team.</h2>
+        <p class="lead">We are always looking for reliable, caring walkers and sitters in Virginia Beach and Charleston.</p>
+        <ul class="checklist">
+          <li><Icon name="check" size={16} />Flexible schedules</li>
+          <li><Icon name="check" size={16} />Pet first aid training</li>
+          <li><Icon name="check" size={16} />Work in your own neighborhood</li>
+        </ul>
+        <div><a class="btn btn--red" href={link('main', '/contact/#book')}>Apply to be a sitter</a></div>
+      </div>
+    </div>
+  </section>
+
+  <Cta />
+</Base>

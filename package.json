@@ -1,0 +1,21 @@
+{
+  "name": "sittersbythesea",
+  "private": true,
+  "type": "module",
+  "description": "Sitters by the Sea: main site plus Virginia Beach and Charleston city sites, built from one Astro codebase.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "SITE=main astro dev",
+    "dev:vb": "SITE=vb astro dev",
+    "dev:chs": "SITE=chs astro dev",
+    "build": "node scripts/build-all.js",
+    "start": "node server.js",
+    "demo": "node scripts/build-demo.js"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.5"
+  }
+}

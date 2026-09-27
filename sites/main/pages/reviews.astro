@@ -1,0 +1,57 @@
+---
+import Base from '../../../shared/layouts/Base.astro';
+import PageHead from '../../../shared/components/PageHead.astro';
+import Reviews from '../../../shared/components/Reviews.astro';
+import Badges from '../../../shared/components/Badges.astro';
+import Cta from '../../../shared/components/Cta.astro';
+import { href } from '../../../shared/lib/site.js';
+import { business } from '../../../shared/data/business.js';
+---
+<Base
+  title="Reviews | Sitters by the Sea Pet Sitting & Dog Walking"
+  description="Read what Virginia Beach and Charleston pet owners say about Sitters by the Sea. Nextdoor Neighborhood Fave 2021–2023."
+  crumbs={[{ name: 'Home', path: '/' }, { name: 'Reviews', path: '/reviews/' }]}
+>
+  <PageHead
+    eyebrow="Reviews"
+    title="Happy pets, relaxed owners"
+    lead="Here is what our clients say after coming home to calm, happy pets."
+    crumbs={[{ name: 'Home', url: href('/') }, { name: 'Reviews' }]}
+  >
+    <div class="btn-row">
+      <a class="btn btn--red btn--sm" href={business.googleReviews}>Read Google reviews</a>
+      <a class="btn btn--outline btn--sm" href={business.facebook}>Read Facebook reviews</a>
+    </div>
+  </PageHead>
+
+  <section class="section">
+    <div class="wrap"><Reviews /></div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">Recognition</span>
+        <h2>Awards and memberships</h2>
+      </div>
+      <Badges />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap stack">
+      <div class="section-head">
+        <span class="eyebrow">Already a client?</span>
+        <h2>Tell your neighbors about us</h2>
+        <p class="lead">Reviews help other pet owners find a sitter they can trust. It only takes a minute.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--outline btn--sm" href={business.googleReviews}>Review us on Google</a>
+        <a class="btn btn--outline btn--sm" href={business.facebook}>Review us on Facebook</a>
+        <a class="btn btn--outline btn--sm" href={business.nextdoor}>Recommend us on Nextdoor</a>
+      </div>
+    </div>
+  </section>
+
+  <Cta />
+</Base>

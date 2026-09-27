@@ -1,0 +1,7 @@
+---
+import Icon from './Icon.astro';
+const items = ['Bonded & insured', 'Pet first aid trained', 'NAPPS & PSI members', '20% military discount'];
+---
+<ul class="trust">
+  {items.map((t) => <li><Icon name="shield" size={20} />{t}</li>)}
+</ul>

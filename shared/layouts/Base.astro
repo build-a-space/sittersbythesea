@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_KEY, MODE, prodUrl, pagePath } from '../lib/site.js';
+import { breadcrumbs } from '../lib/schema.js';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  schema?: object[];
+  crumbs?: { name: string; path: string }[];
+  noindex?: boolean;
+}
+const { title, description, image = '/images/photos/dog-beach-sunset.jpg', schema = [], crumbs, noindex = false } = Astro.props;
+const path = pagePath(Astro.url.pathname);
+const canonical = prodUrl(SITE_KEY, path);
+const ogImage = prodUrl(SITE_KEY, image);
+const ld = crumbs ? [...schema, breadcrumbs(SITE_KEY, crumbs)] : schema;
+---
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {(noindex || MODE === 'demo') && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#14234f" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Sitters by the Sea" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&family=Martian+Mono:wght@500&display=swap" />
+
+    {ld.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+  </head>
+  <body data-site={SITE_KEY}>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

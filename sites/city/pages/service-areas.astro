@@ -1,0 +1,57 @@
+---
+import Base from '../../../shared/layouts/Base.astro';
+import PageHead from '../../../shared/components/PageHead.astro';
+import Cta from '../../../shared/components/Cta.astro';
+import Icon from '../../../shared/components/Icon.astro';
+import { city, href, bookHref } from '../../../shared/lib/site.js';
+
+const c = city;
+const names = c.areas.map((a) => a.name);
+---
+<Base
+  title={`${c.name} Pet Sitting Service Areas: ${names.slice(0, 3).join(', ')} & More | Sitters by the Sea`}
+  description={`Sitters by the Sea dog walkers and pet sitters serve ${names.join(', ')} in the ${c.name}, ${c.state} area.`}
+  image={c.heroImage}
+  crumbs={[{ name: c.name, path: '/' }, { name: 'Service areas', path: '/service-areas/' }]}
+>
+  <PageHead
+    eyebrow="Service areas"
+    title={`Where we walk and sit in ${c.name}`}
+    lead={`Local walkers and sitters across ${names.length} ${c.name}-area neighborhoods. Don't see yours? Ask us.`}
+    crumbs={[{ name: c.name, url: href('/') }, { name: 'Service areas' }]}
+  >
+    <ul class="chips">
+      {c.areas.map((a) => <li><a href={`#${a.id}`}>{a.name}</a></li>)}
+    </ul>
+  </PageHead>
+
+  <section class="section">
+    <div class="wrap areas">
+      {c.areas.map((a) => (
+        <article class="area" id={a.id}>
+          <span class="area__pin"><Icon name="pin" size={20} /></span>
+          <h2 style="font-size:1.4rem">Dog walking &amp; pet sitting {a.prep ?? 'in'} {a.name}</h2>
+          <p>{a.text}</p>
+          <a class="textlink" href={bookHref()}>Book a sitter {a.prep ?? 'in'} {a.name} <Icon name="arrow" size={16} /></a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--accent">
+    <div class="wrap split">
+      <div class="split__media"><img src={c.heroImage} alt={c.heroAlt} width="480" height="480" loading="lazy" /></div>
+      <div class="stack">
+        <span class="eyebrow">Just outside our area?</span>
+        <h2>Give us a call anyway</h2>
+        <p class="lead">We add new neighborhoods as our {c.name} team grows. Call or send a request and we will tell you if a sitter can reach you.</p>
+        <div class="btn-row">
+          <a class="btn btn--red" href={bookHref()}>Send a request</a>
+          <a class="btn btn--outline" href={`tel:${c.phoneHref}`}>Call {c.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Cta title={`Book your ${c.name} meet & greet`} phone={c.phone} phoneHref={c.phoneHref} />
+</Base>

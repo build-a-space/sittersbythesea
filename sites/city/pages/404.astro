@@ -1,0 +1,10 @@
+---
+import Base from '../../../shared/layouts/Base.astro';
+import PageHead from '../../../shared/components/PageHead.astro';
+import { href } from '../../../shared/lib/site.js';
+---
+<Base title="Page not found | Sitters by the Sea" description="This page could not be found." noindex>
+  <PageHead eyebrow="404" title="This page wandered off" lead="It happens to the best of us. Let's get you back on the leash." crumbs={[{ name: 'Home', url: href('/') }, { name: 'Not found' }]}>
+    <div class="btn-row"><a class="btn btn--red" href={href('/')}>Go to the homepage</a></div>
+  </PageHead>
+</Base>

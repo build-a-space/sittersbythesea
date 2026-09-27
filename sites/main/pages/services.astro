@@ -1,0 +1,51 @@
+---
+import Base from '../../../shared/layouts/Base.astro';
+import PageHead from '../../../shared/components/PageHead.astro';
+import ServiceList from '../../../shared/components/ServiceList.astro';
+import Military from '../../../shared/components/Military.astro';
+import Faq from '../../../shared/components/Faq.astro';
+import Cta from '../../../shared/components/Cta.astro';
+import { href, link } from '../../../shared/lib/site.js';
+import { faqPage } from '../../../shared/lib/schema.js';
+import { faqs } from '../../../shared/data/services.js';
+---
+<Base
+  title="Pet Sitting & Dog Walking Services | Sitters by the Sea"
+  description="Dog walks, drop-in visits, half-day visits, standard and deluxe overnights, live-in 24/7 care and pet taxi in Virginia Beach and Charleston. Bonded, insured and pet first aid trained."
+  schema={[faqPage(faqs)]}
+  crumbs={[{ name: 'Home', path: '/' }, { name: 'Services', path: '/services/' }]}
+>
+  <PageHead
+    eyebrow="Services"
+    title="Pet care for every schedule"
+    lead="Every visit ends with photos and a report, so you always know how your pets are doing. Available in Virginia Beach and Charleston."
+    crumbs={[{ name: 'Home', url: href('/') }, { name: 'Services' }]}
+  >
+    <div class="btn-row">
+      <a class="btn btn--red btn--sm" href={link('vb', '/services/')}>Virginia Beach services</a>
+      <a class="btn btn--outline btn--sm" href={link('chs', '/services/')}>Charleston services</a>
+    </div>
+  </PageHead>
+
+  <section class="section">
+    <div class="wrap"><ServiceList /></div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap">
+      <Military title="Thank you for your service" body="We offer 20% off all services for those who have served and those deploying, in both Virginia Beach and Charleston." />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap stack-lg">
+      <div class="section-head">
+        <span class="eyebrow">Questions</span>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <Faq />
+    </div>
+  </section>
+
+  <Cta />
+</Base>
