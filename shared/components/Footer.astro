@@ -48,7 +48,7 @@ const phoneHref = city?.phoneHref ?? business.phoneHref;
     </div>
     <div class="footer__bottom">
       <span>© {year} Sitters by the Sea. All rights reserved.</span>
-      <span>{business.tagline}</span>
+      <span><a href={link('main', '/privacy-policy/')}>Privacy policy</a> · {business.tagline}</span>
     </div>
   </div>
 </footer>

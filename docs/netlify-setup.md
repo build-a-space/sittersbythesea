@@ -16,7 +16,7 @@ Repeat for each row in the table:
 
 1. In Netlify, choose **Add new site → Import an existing project → GitHub**,
    and pick `build-a-space/sittersbythesea`.
-2. Branch to deploy: `main` (after this work is merged).
+2. Branch to deploy: `main`.
 3. Leave the build command and publish directory as they are. Netlify reads
    them from `netlify.toml` (`npm run build:netlify`, `netlify-publish`).
 4. Before the first deploy, open **Site configuration → Environment

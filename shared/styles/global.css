@@ -428,3 +428,6 @@ p { margin: 0; }
   .utility__group--contact { display: none; }
   .utility .wrap { justify-content: center; }
 }
+
+.prose h2 { font-size: 1.4rem; margin-top: 12px; }
+.footer__bottom a { color: var(--muted); text-decoration: underline; }
