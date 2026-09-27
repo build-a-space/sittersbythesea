@@ -1,0 +1,11 @@
+---
+// Floating "Text us" button, shown on phones only.
+import { city } from '../lib/site.js';
+import { business } from '../data/business.js';
+const number = city?.phoneHref ?? business.phoneHref;
+const body = encodeURIComponent(`Hi Sitters by the Sea! I'd like to ask about pet care${city ? ` in ${city.name}` : ''}.`);
+---
+<a class="textus" href={`sms:${number}?&body=${body}`} aria-label={`Text us at ${city?.phone ?? business.phone}`}>
+  <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5.5A2.5 2.5 0 016.5 3h11A2.5 2.5 0 0120 5.5v8a2.5 2.5 0 01-2.5 2.5H10l-4.2 3.6c-.5.4-1.3 0-1.3-.6V16A2.5 2.5 0 014 13.5z" fill="currentColor"/><circle cx="8.5" cy="9.5" r="1.2" fill="#d62d32"/><circle cx="12" cy="9.5" r="1.2" fill="#d62d32"/><circle cx="15.5" cy="9.5" r="1.2" fill="#d62d32"/></svg>
+  Text us
+</a>

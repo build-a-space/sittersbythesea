@@ -29,7 +29,7 @@ const phoneHref = city?.phoneHref ?? business.phoneHref;
       {SITE_KEY === 'chs' ? <span class="utility__here">Charleston, SC</span> : <a href={link('chs')}>Charleston, SC</a>}
       {SITE_KEY !== 'main' && <a href={link('main')}>Main site</a>}
     </div>
-    <div class="utility__group">
+    <div class="utility__group utility__group--contact">
       <a href={`tel:${phoneHref}`}>{phone}</a>
       <a class="utility__email" href={`mailto:${business.email}`}>{business.email}</a>
       {business.timeToPet && <a href={business.timeToPet}>Client login</a>}
@@ -52,6 +52,7 @@ const phoneHref = city?.phoneHref ?? business.phoneHref;
       <summary><Icon name="menu" /> Menu</summary>
       <div class="menu__panel">
         {nav.map((item) => <a href={item.url}>{item.name}</a>)}
+        <a href={`tel:${phoneHref}`}>Call {phone}</a>
         <a class="btn btn--red" href={bookHref()}>Book a meet &amp; greet</a>
       </div>
     </details>
