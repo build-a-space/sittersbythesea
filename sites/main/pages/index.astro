@@ -22,9 +22,12 @@ const coastImages = {
 <Base
   title="Sitters by the Sea | Dog Walking & Pet Sitting in Virginia Beach & Charleston"
   description="Bonded, insured and pet first aid trained dog walkers and pet sitters in Virginia Beach, VA and Charleston, SC. Walks, drop-ins, overnights and live-in care, with photos and a report after every visit."
+  image="/images/photos/dog-dunes.jpg"
   schema={[organization(), website('main')]}
 >
-  <section class="hero">
+  <section class="hero hero--photo">
+    <img class="hero__bg" src="/images/photos/dog-dunes.jpg" alt="A happy tan dog in a red collar standing on a sand dune above the beach under a blue sky" width="799" height="599" fetchpriority="high" />
+    <div class="hero__shade" aria-hidden="true"></div>
     <div class="wrap">
       <div class="hero__copy">
         <span class="eyebrow">Virginia Beach, VA · Charleston, SC</span>
@@ -36,14 +39,7 @@ const coastImages = {
         </div>
         <Trust />
       </div>
-      <div class="hero__media">
-        <img class="hero__sun" src="/images/brand/sun.png" alt="" width="175" height="166" />
-        <div class="hero__photo">
-          <img src="/images/photos/dog-beach-sunset.jpg" alt="A dog in a blue harness on the beach at sunrise" width="480" height="480" fetchpriority="high" />
-        </div>
-        <img class="hero__cloud" src="/images/brand/cloud.png" alt="" width="150" height="150" />
-        <div class="hero__report"><WalkReport /></div>
-      </div>
+      <div class="hero__aside"><WalkReport place="Dune walk" /></div>
     </div>
     <Wave />
   </section>

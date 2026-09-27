@@ -70,6 +70,6 @@ export const sampleReport = {
   miles: 1.4,
   mood: 'Happy',
   checks: ['Pee', 'Poop', 'Fresh water', 'Breakfast', 'Paws rinsed'],
-  note: 'Bear watched the sunrise and said hi to every dog on the beach.',
+  note: 'Bear chased the waves and said hi to every dog on the beach.',
   photo: '/images/photos/dog-beach-sunset.jpg',
 };
