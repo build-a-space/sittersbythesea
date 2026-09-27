@@ -1,0 +1,490 @@
+<title>Sitters by the Sea Relaunch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=Martian+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F5F4; --surface:#FFFFFF; --ink:#10293A; --muted:#4F6470; --line:#D5DFDF;
+  --sea:#1E5F74; --glass:#BFE3DA; --buoy:#E8622C; --haint:#9FD3DF; --row:#F2B8AE; --sand:#EDE3D0;
+  --buoy-ink:#FFFFFF; --chip:#E4EEEC;
+  --display:"Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body:"Figtree", "Segoe UI", system-ui, sans-serif;
+  --mono:"Martian Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0B1A23; --surface:#122633; --ink:#E4EEF0; --muted:#9AB0BA; --line:#24404F;
+    --sea:#6FB7C9; --glass:#2D5B55; --buoy:#F07A48; --haint:#3F7F8C; --row:#8E5A55; --sand:#3A3428;
+    --chip:#183444;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0B1A23; --surface:#122633; --ink:#E4EEF0; --muted:#9AB0BA; --line:#24404F;
+  --sea:#6FB7C9; --glass:#2D5B55; --buoy:#F07A48; --haint:#3F7F8C; --row:#8E5A55; --sand:#3A3428;
+  --chip:#183444;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:20px;padding-block:0 80px}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.15rem;font-weight:600}
+p{margin:0;max-width:66ch}
+a{color:var(--sea)}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lede{font-size:1.15rem;color:var(--muted)}
+header.top{padding-block:56px 32px;display:grid;gap:16px;border-bottom:1px solid var(--line)}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--mono);font-size:.7rem;padding:4px 10px;border-radius:99px;background:var(--chip);color:var(--ink)}
+section{padding-block:48px;border-bottom:1px solid var(--line);display:grid;gap:20px}
+.stack{display:grid;gap:12px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;display:grid;gap:10px;align-content:start}
+ul.clean{margin:0;padding-left:1.1em;display:grid;gap:4px}
+.note{border-left:3px solid var(--buoy);padding:12px 16px;background:var(--surface);border-radius:0 10px 10px 0}
+.note p{max-width:none}
+
+/* architecture */
+.arch{display:grid;gap:14px}
+.arch .root{justify-self:center;text-align:center}
+.arch .kids{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.host{font-family:var(--mono);font-size:.78rem;word-break:break-all}
+.site{border-radius:14px;padding:18px;display:grid;gap:8px;border:1px solid var(--line);background:var(--surface)}
+.site.vb{border-top:6px solid var(--buoy)}
+.site.chs{border-top:6px solid var(--haint)}
+.site.main{border-top:6px solid var(--sea);max-width:520px}
+
+/* facts */
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;width:32%;color:var(--muted)}
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+
+/* palette */
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.sw{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+.sw .c{height:72px}
+.sw .t{padding:10px 12px;display:grid;gap:2px}
+.sw .t b{font-size:.9rem}
+.sw .t span{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.type{display:grid;gap:14px}
+.spec{display:grid;grid-template-columns:120px 1fr;gap:12px;align-items:baseline;padding-block:10px;border-bottom:1px dashed var(--line)}
+@media (max-width:520px){.spec{grid-template-columns:1fr}}
+
+/* mockup (fixed brand look, independent of viewer theme) */
+.browser{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 20px 50px -30px rgba(16,41,58,.5);background:#fff}
+.bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:#E7ECEB}
+.dot{width:10px;height:10px;border-radius:50%;background:#C8D2D1}
+.url{flex:1;min-width:0;margin-left:8px;background:#fff;border-radius:8px;padding:4px 10px;font-family:var(--mono);font-size:.7rem;color:#4F6470;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.m{--m-ink:#10293A;--m-bg:#F7FAF9;color:var(--m-ink);background:var(--m-bg);font-family:var(--body)}
+.m nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 24px;flex-wrap:wrap}
+.logo{font-family:var(--display);font-weight:800;font-size:1.2rem;display:flex;align-items:center;gap:8px;letter-spacing:-.01em}
+.logo svg{flex:none}
+.m nav .links{display:flex;gap:18px;font-size:.85rem;font-weight:500;flex-wrap:wrap}
+.btn{display:inline-block;background:#E8622C;color:#fff;font-weight:700;border-radius:99px;padding:10px 18px;font-size:.9rem;text-decoration:none;border:0}
+.btn.ghost{background:transparent;color:#10293A;box-shadow:inset 0 0 0 2px #10293A}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;padding:28px 24px 0;align-items:end}
+@media (max-width:760px){.hero{grid-template-columns:1fr}}
+.hero h3{font-size:clamp(2rem,4.6vw,3.3rem);font-weight:800;letter-spacing:-.03em;line-height:1}
+.hero h3 em{font-style:normal;color:#1E5F74}
+.hero p{color:#4F6470;margin-top:14px;font-size:1.02rem}
+.hero .ctas{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.trust{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:18px;font-family:var(--mono);font-size:.68rem;color:#4F6470;text-transform:uppercase;letter-spacing:.06em}
+.report{background:#fff;border-radius:18px 18px 0 0;box-shadow:0 -8px 30px -18px rgba(16,41,58,.35);padding:18px;display:grid;gap:12px;border:1px solid #E1E8E7;border-bottom:0}
+.report .head{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.report .who{font-weight:700}
+.report .when{font-family:var(--mono);font-size:.68rem;color:#4F6470}
+.photo{height:130px;border-radius:12px;background:linear-gradient(180deg,#BFE3DA 0%,#9FD3DF 55%,#EDE3D0 55%,#EDE3D0 100%);position:relative;overflow:hidden}
+.photo svg{position:absolute;left:50%;bottom:10px;transform:translateX(-50%)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:#F2F5F4;border-radius:10px;padding:8px 10px}
+.stat b{display:block;font-family:var(--display);font-size:1.15rem}
+.stat span{font-family:var(--mono);font-size:.6rem;color:#4F6470;text-transform:uppercase;letter-spacing:.06em}
+.checks{display:flex;flex-wrap:wrap;gap:6px}
+.checks span{font-size:.72rem;background:#E6F3EF;color:#1E5F74;border-radius:99px;padding:3px 9px;font-weight:600}
+.quote{font-size:.85rem;color:#10293A;font-style:italic}
+.locs{background:#10293A;color:#F2F5F4;padding:28px 24px;display:grid;gap:16px}
+.locs .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.loc{border-radius:14px;padding:18px;display:grid;gap:8px;color:#10293A}
+.loc.vb{background:#FBE4D8}
+.loc.chs{background:linear-gradient(90deg,#F2B8AE 0 20%,#F6D98C 20% 40%,#9FD3DF 40% 60%,#BFE3DA 60% 80%,#FBE4D8 80%) top/100% 10px no-repeat,#E9F3F1;padding-top:26px}
+.loc.chs .inner{background:#E9F3F1;border-radius:10px;padding:0}
+.loc small{font-family:var(--mono);font-size:.64rem;text-transform:uppercase;letter-spacing:.08em;color:#4F6470}
+.loc b{font-family:var(--display);font-size:1.35rem}
+.loc .areas{font-size:.8rem;color:#33505F}
+.svc{padding:28px 24px;display:grid;gap:14px}
+.svc .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.svc .card{background:#fff;border:1px solid #E1E8E7;border-radius:12px;padding:14px;display:grid;gap:4px}
+.svc .card b{font-family:var(--display);font-size:1rem}
+.svc .card span{font-size:.8rem;color:#4F6470}
+.svc .card .t{font-family:var(--mono);font-size:.64rem;color:#1E5F74}
+
+/* location hero mockups */
+.lh{padding:24px;display:grid;gap:10px;min-height:220px;align-content:end;position:relative;overflow:hidden}
+.lh.vb{background:linear-gradient(180deg,#FFE3D2 0%,#FFE3D2 58%,#E8622C 58%,#E8622C 62%,#EDE3D0 62%);color:#10293A}
+.lh.chs{background:#9FD3DF;color:#10293A}
+.lh.chs .houses{position:absolute;inset:0 0 auto 0;height:70px;display:flex}
+.lh.chs .houses i{flex:1;display:block}
+.lh h4{font-family:var(--display);font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin:0;letter-spacing:-.02em;line-height:1.05;position:relative}
+.lh p{font-size:.88rem;position:relative;color:#23404F}
+.lh .tag{font-family:var(--mono);font-size:.64rem;text-transform:uppercase;letter-spacing:.08em;position:relative}
+
+/* sitemap */
+.tree{font-family:var(--mono);font-size:.76rem;line-height:1.9;white-space:pre;overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px;color:var(--ink)}
+
+/* phases */
+.phases{display:grid;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}
+.phase{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.phase:last-child{border-bottom:0}
+.phase .when{font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.phase .when b{display:block;font-family:var(--display);font-size:1.05rem;color:var(--ink)}
+@media (max-width:560px){.phase{grid-template-columns:1fr;gap:6px}}
+
+ol.q{margin:0;padding-left:1.3em;display:grid;gap:10px}
+ol.q li::marker{font-family:var(--mono);color:var(--buoy)}
+:focus-visible{outline:3px solid var(--buoy);outline-offset:2px}
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">Website plan · Draft 1 · September 27, 2026</div>
+  <h1>Sitters by the Sea relaunch</h1>
+  <p class="lede">A new brand look and three connected websites for a dog walking and pet sitting business: one main site and one site each for Virginia Beach and Charleston, SC. Built on Node.js, planned for local SEO from day one.</p>
+  <div class="meta">
+    <span class="chip">sittersbythesea.net</span>
+    <span class="chip">Node.js + Astro</span>
+    <span class="chip">Local SEO first</span>
+    <span class="chip">Status: plan for review</span>
+  </div>
+</header>
+
+<section>
+  <div class="stack">
+    <div class="eyebrow">Structure</div>
+    <h2>Three sites, one brand</h2>
+    <p>The main site is the brand front door. It explains who Sitters by the Sea is and sends people to their city. Each city site is where people book, and it is built to rank for that city's searches.</p>
+  </div>
+  <div class="arch">
+    <div class="site main root">
+      <div class="eyebrow">Main site</div>
+      <div class="host">sittersbythesea.net</div>
+      <p style="font-size:.92rem">Brand story, how it works, service overview, pick your city, careers, reviews from both cities.</p>
+    </div>
+    <div class="kids">
+      <div class="site vb">
+        <div class="eyebrow">City site</div>
+        <h3>Virginia Beach, VA</h3>
+        <div class="host">virginiabeach.sittersbythesea.net</div>
+        <p style="font-size:.92rem">Local services, pricing, neighborhood pages, military discount for Oceana and Dam Neck families, booking.</p>
+      </div>
+      <div class="site chs">
+        <div class="eyebrow">City site</div>
+        <h3>Charleston, SC</h3>
+        <div class="host">charleston.sittersbythesea.net</div>
+        <p style="font-size:.92rem">Local services, pricing, island and neighborhood pages, Joint Base Charleston discount, booking.</p>
+      </div>
+    </div>
+  </div>
+  <div class="note">
+    <p><b>An SEO tradeoff to know about.</b> Google treats each subdomain as a mostly separate site, so the city sites don't automatically share the main site's ranking strength the way folders like <span class="host">/virginia-beach/</span> would. Subdomains still work well for local businesses when each one gets its own Google Business Profile, its own reviews and links, and strong cross-links. The plan below does all of that. The current city pages already rank, so their old URLs will 301-redirect to the new subdomains to keep that traffic.</p>
+  </div>
+</section>
+
+<section>
+  <div class="stack">
+    <div class="eyebrow">What we know today</div>
+    <h2>Current business, from public listings</h2>
+    <p>This comes from your homepage screenshot plus search results and directory listings. The live site was blocked from my environment. Please correct anything that is out of date.</p>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <tr><th>Business</th><td>Sitters by the Sea: locally owned dog walking, pet sitting and house sitting. Founded 2019 in Virginia Beach.</td></tr>
+      <tr><th>Owner</th><td>Joee Russo-Duffy. Reviews mention kindness, reliability and photo updates while owners are away.</td></tr>
+      <tr><th>Tagline</th><td>Sit. Stay. Go. Play.</td></tr>
+      <tr><th>Credentials</th><td>Bonded, insured, pet first aid trained. Member of NAPPS (National Association of Professional Pet Sitters) and Pet Sitters International.</td></tr>
+      <tr><th>Awards</th><td>Nextdoor Neighborhood Fave 2021, 2022 and 2023. Nominated for Best Pet Sitting Business on the Southside, 2021–2023.</td></tr>
+      <tr><th>Booking</th><td>Time To Pet: online booking, client login, create account, and iOS and Android apps</td></tr>
+      <tr><th>Hours</th><td>Office Mon–Sat 9 AM–6 PM, closed Sunday. Pet sitting 7 days a week, 7 AM–8 PM.</td></tr>
+      <tr><th>Testimonials on site</th><td>Mike J., Heidi M., Joe K. (all Virginia Beach). Links out to Google and Facebook reviews.</td></tr>
+      <tr><th>Services</th><td>Dog walking, drop-in visits, half-day visits, Standard Overnight (10 PM–6 AM), Deluxe Overnight (plus two midday drop-ins), Superior 24/7 live-in care, pet taxi, house sitting</td></tr>
+      <tr><th>Military discount</th><td>20% off all services for those who have served and those deploying</td></tr>
+      <tr><th>Virginia Beach areas</th><td>Oceanfront, General Booth, Oceana, Dam Neck, Nimmo Parkway, Sandbridge</td></tr>
+      <tr><th>Charleston areas</th><td>Downtown, Shem Creek, Sullivan's Island, Isle of Palms, Seabrook Island, Kiawah Island, Johns Island, James Island, Folly Beach</td></tr>
+      <tr><th>Contact</th><td>(757) 348-0411 · info@sittersbythesea.net</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="stack">
+    <div class="eyebrow">Current site review</div>
+    <h2>What to keep and what to change</h2>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <h3>Keep</h3>
+      <ul class="clean">
+        <li>The blue brand family, so returning clients still recognize you</li>
+        <li>"Sit. Stay. Go. Play." as the tagline</li>
+        <li>Real photos of client dogs on real beaches. They beat any stock photo.</li>
+        <li>The four-step getting started process</li>
+        <li>Trust badges: NAPPS, PSI, Nextdoor Fave, bonded and insured</li>
+        <li>Client Login and app download links into Time To Pet</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Change</h3>
+      <ul class="clean">
+        <li>Script headlines are hard to read, especially on phones. Use a clear, friendly headline face instead.</li>
+        <li>Grey italic review text is low contrast. Make reviews larger and easier to read, and show star ratings with the total count.</li>
+        <li>Virginia Beach and Charleston share one page today. Give each city its own site, reviews and phone number.</li>
+        <li>The red splat and seagull decorations compete with the content. Use one accent color with a clear job: book buttons.</li>
+        <li>No prices and no clear "what happens after I book". Add both.</li>
+        <li>"Get Started" appears four times. One specific action, "Book a meet &amp; greet", is clearer.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="stack">
+    <div class="eyebrow">Design direction</div>
+    <h2>Coastal, bright and trustworthy</h2>
+    <p>This keeps your blue, but deepens it into a harbor navy that reads as more established. The rest of the palette borrows from the two coastlines, where most pet sitting sites fall back on paw prints. Virginia Beach gets buoy orange and boardwalk sand. Charleston gets haint blue, the pale porch-ceiling blue the city is known for, and Rainbow Row pastels. A deep harbor navy ties both cities back to the main brand.</p>
+  </div>
+  <div class="swatches">
+    <div class="sw"><div class="c" style="background:#10293A"></div><div class="t"><b>Harbor Navy</b><span>#10293A · text, footer</span></div></div>
+    <div class="sw"><div class="c" style="background:#1E5F74"></div><div class="t"><b>Tidewater</b><span>#1E5F74 · links, headings</span></div></div>
+    <div class="sw"><div class="c" style="background:#E8622C"></div><div class="t"><b>Buoy Orange</b><span>#E8622C · book buttons, VB</span></div></div>
+    <div class="sw"><div class="c" style="background:#9FD3DF"></div><div class="t"><b>Haint Blue</b><span>#9FD3DF · Charleston</span></div></div>
+    <div class="sw"><div class="c" style="background:#BFE3DA"></div><div class="t"><b>Sea Glass</b><span>#BFE3DA · soft panels</span></div></div>
+    <div class="sw"><div class="c" style="background:#EDE3D0"></div><div class="t"><b>Dune</b><span>#EDE3D0 · sand accents</span></div></div>
+  </div>
+  <div class="type">
+    <div class="spec"><span class="eyebrow">Headlines</span><span style="font-family:var(--display);font-weight:800;font-size:1.9rem;letter-spacing:-.02em;line-height:1.1">Bricolage Grotesque</span></div>
+    <div class="spec"><span class="eyebrow">Body text</span><span style="font-size:1.05rem">Figtree: friendly, very readable on phones, where most pet owners will book.</span></div>
+    <div class="spec"><span class="eyebrow">Details</span><span style="font-family:var(--mono);font-size:.85rem">MARTIAN MONO · 32 MIN · 1.4 MI · 2:14 PM</span></div>
+  </div>
+  <div class="note">
+    <p><b>Signature element: the walk report card.</b> Owners already love Joee's photo updates, so the design puts a walk report front and center: photo, time, distance and a checklist (water refilled, treats given, all business done). It shows exactly what you get, and it gives the brand something no competitor has.</p>
+  </div>
+</section>
+
+<section>
+  <div class="stack">
+    <div class="eyebrow">Mockup</div>
+    <h2>Main site homepage</h2>
+  </div>
+  <div class="browser">
+    <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">https://sittersbythesea.net</span></div>
+    <div class="m">
+      <nav>
+        <div class="logo">
+          <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="14" fill="#E8622C"/><circle cx="15" cy="15" r="7" fill="#F7FAF9"/><path d="M15 1v6M15 23v6M1 15h6M23 15h6" stroke="#F7FAF9" stroke-width="3.2"/></svg>
+          Sitters by the Sea
+        </div>
+        <div class="links"><span>Services</span><span>How it works</span><span>Locations</span><span>Reviews</span><span>About Joee</span></div>
+        <a class="btn" href="#book" onclick="return false">Book a meet &amp; greet</a>
+      </nav>
+      <div class="hero">
+        <div style="padding-bottom:28px">
+          <h3>Coastal dog walks, <em>with a report card</em> every time.</h3>
+          <p>Bonded, insured and pet first aid trained walkers and sitters in Virginia Beach and Charleston. You get photos and a full walk report after every visit.</p>
+          <div class="ctas"><a class="btn" href="#vb" onclick="return false">Virginia Beach</a><a class="btn ghost" href="#chs" onclick="return false">Charleston, SC</a></div>
+          <div class="trust"><span>Sit. Stay. Go. Play.</span><span>Since 2019</span><span>Bonded &amp; insured</span><span>NAPPS &amp; PSI members</span><span>Nextdoor Fave 2021–23</span></div>
+        </div>
+        <div class="report" aria-label="Example walk report">
+          <div class="head"><span class="who">Biscuit's walk report</span><span class="when">TUE · 2:14 PM · OCEANFRONT</span></div>
+          <div class="photo">
+            <svg width="120" height="70" viewBox="0 0 120 70" aria-hidden="true"><g fill="#10293A"><ellipse cx="58" cy="44" rx="30" ry="14"/><circle cx="92" cy="30" r="12"/><path d="M97 22l10-8-2 14z"/><rect x="36" y="52" width="6" height="16" rx="3"/><rect x="50" y="52" width="6" height="16" rx="3"/><rect x="66" y="52" width="6" height="16" rx="3"/><rect x="78" y="52" width="6" height="16" rx="3"/><path d="M28 40c-10-4-14-14-12-20 4 6 8 10 16 12z"/></g><circle cx="96" cy="28" r="2" fill="#BFE3DA"/></svg>
+          </div>
+          <div class="stats">
+            <div class="stat"><b>32 min</b><span>Walk time</span></div>
+            <div class="stat"><b>1.4 mi</b><span>Distance</span></div>
+            <div class="stat"><b>Happy</b><span>Mood</span></div>
+          </div>
+          <div class="checks"><span>Pee</span><span>Poop</span><span>Water refilled</span><span>Treat given</span><span>Paws rinsed</span></div>
+          <div class="quote">"Biscuit said hi to every dog on the boardwalk today." · Joee</div>
+        </div>
+      </div>
+      <div class="locs">
+        <div style="font-family:var(--display);font-size:1.4rem;font-weight:700">Pick your coast</div>
+        <div class="row">
+          <div class="loc vb"><small>virginiabeach.sittersbythesea.net</small><b>Virginia Beach, VA</b><span class="areas">Oceanfront · General Booth · Oceana · Dam Neck · Nimmo · Sandbridge</span></div>
+          <div class="loc chs"><small>charleston.sittersbythesea.net</small><b>Charleston, SC</b><span class="areas">Downtown · Shem Creek · Sullivan's · Isle of Palms · Folly · Kiawah · James &amp; Johns Island</span></div>
+        </div>
+      </div>
+      <div class="svc">
+        <div style="font-family:var(--display);font-size:1.4rem;font-weight:700">Care for every schedule</div>
+        <div class="row">
+          <div class="card"><span class="t">20–60 MIN</span><b>Dog walks</b><span>Solo walks with a report and photos</span></div>
+          <div class="card"><span class="t">DROP-IN</span><b>Pet visits</b><span>Feeding, meds, litter and play</span></div>
+          <div class="card"><span class="t">10 PM–6 AM</span><b>Overnight care</b><span>Standard and Deluxe options</span></div>
+          <div class="card"><span class="t">24/7</span><b>Live-in care</b><span>A sitter at home the whole trip</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="stack">
+    <div class="eyebrow">Mockup</div>
+    <h2>City site heroes</h2>
+    <p>Both city sites share the same layout and components. The color, photos, landmarks and neighborhood names change, so each one feels local.</p>
+  </div>
+  <div class="grid2">
+    <div class="browser">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">virginiabeach.sittersbythesea.net</span></div>
+      <div class="lh vb">
+        <span class="tag">Oceanfront to Sandbridge</span>
+        <h4>Dog walking &amp; pet sitting in Virginia Beach</h4>
+        <p>Trusted by Oceana and Dam Neck families. 20% off for service members.</p>
+        <div><a class="btn" href="#book" onclick="return false">Book in Virginia Beach</a></div>
+      </div>
+    </div>
+    <div class="browser">
+      <div class="bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">charleston.sittersbythesea.net</span></div>
+      <div class="lh chs">
+        <div class="houses" aria-hidden="true"><i style="background:#F2B8AE"></i><i style="background:#F6D98C"></i><i style="background:#E9F3F1"></i><i style="background:#BFE3DA"></i><i style="background:#F2B8AE"></i><i style="background:#FBE4D8"></i></div>
+        <span class="tag">Downtown to Folly Beach</span>
+        <h4>Dog walking &amp; pet sitting in Charleston, SC</h4>
+        <p>From Shem Creek to Kiawah. Daily walks, drop-ins and overnight care.</p>
+        <div><a class="btn" href="#book" onclick="return false">Book in Charleston</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="stack">
+    <div class="eyebrow">Sitemaps</div>
+    <h2>Pages on each site</h2>
+  </div>
+  <div class="grid2">
+    <div class="tree">sittersbythesea.net
+├─ /                  Home, pick your city
+├─ /services/         Overview of all care types
+├─ /how-it-works/     Meet &amp; greet, booking, reports
+├─ /about/            Joee's story, team, credentials
+├─ /reviews/          Reviews from both cities
+├─ /military/         20% discount details
+├─ /careers/          Become a sitter
+├─ /faq/
+├─ /blog/             Coastal dog care tips
+└─ /contact/</div>
+    <div class="tree">virginiabeach.  |  charleston.
+├─ /                  City home + booking
+├─ /dog-walking/
+├─ /pet-sitting/      Drop-in visits
+├─ /overnight-pet-sitting/
+├─ /live-in-pet-care/
+├─ /pet-taxi/
+├─ /pricing/
+├─ /service-areas/
+│  ├─ /oceanfront/    (one page per
+│  ├─ /sandbridge/     neighborhood
+│  └─ …               or island)
+├─ /military-discount/
+├─ /reviews/
+└─ /book/</div>
+  </div>
+</section>
+
+<section>
+  <div class="stack">
+    <div class="eyebrow">Search</div>
+    <h2>SEO plan</h2>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <h3>Target searches</h3>
+      <ul class="clean">
+        <li>"dog walker Virginia Beach", "pet sitter Virginia Beach"</li>
+        <li>"dog walking Charleston SC", "pet sitter Mount Pleasant"</li>
+        <li>Neighborhood searches: "dog walker Sandbridge", "pet sitter Isle of Palms", "Folly Beach dog sitter"</li>
+        <li>Military searches: "pet sitter near NAS Oceana", "dog sitting while deployed Charleston"</li>
+        <li>Service searches: "overnight pet sitter", "in-home dog sitting"</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Technical basics</h3>
+      <ul class="clean">
+        <li>Static HTML pages so they load fast and score well on Core Web Vitals</li>
+        <li>LocalBusiness schema per city with address, hours, service area and ratings</li>
+        <li>Service, FAQ and Review schema where it applies</li>
+        <li>Separate XML sitemap and robots.txt per subdomain</li>
+        <li>Unique titles, descriptions and Open Graph images on every page</li>
+        <li>301 redirects from every old URL to its new home</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Local signals</h3>
+      <ul class="clean">
+        <li>One Google Business Profile per city, each linked to its own subdomain</li>
+        <li>A local phone number for Charleston (843) if you have one</li>
+        <li>Matching name, address and phone on Yelp, Nextdoor, Rover and directories</li>
+        <li>A review request after every first booking</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Content</h3>
+      <ul class="clean">
+        <li>Neighborhood pages written with real local detail: beach dog rules, parks, walking routes</li>
+        <li>A monthly blog post per city, such as "Is my dog allowed on the Virginia Beach boardwalk in summer?"</li>
+        <li>A PCS and deployment guide for military families</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="stack">
+    <div class="eyebrow">Build</div>
+    <h2>Node.js setup</h2>
+    <p>One codebase builds all three sites. Shared parts (header, footer, walk report card, service cards, booking form) live in one place, and each city has its own content files. A fix made once shows up on every site.</p>
+  </div>
+  <div class="grid3">
+    <div class="panel"><h3>Astro on Node.js</h3><p style="font-size:.93rem">Builds plain HTML pages with almost no JavaScript, which is ideal for SEO and speed. Runs on Node 20+.</p></div>
+    <div class="panel"><h3>One repo, three builds</h3><p style="font-size:.93rem"><span class="host">SITE=main</span>, <span class="host">SITE=vb</span> and <span class="host">SITE=chs</span> each build their own site from shared components.</p></div>
+    <div class="panel"><h3>Hosting</h3><p style="font-size:.93rem">Vercel or Netlify, one project per subdomain, all from this repo. Free SSL and a global CDN.</p></div>
+    <div class="panel"><h3>Forms &amp; booking</h3><p style="font-size:.93rem">Book, Client Login and app buttons go straight into your Time To Pet portal. A small Node endpoint handles the general contact form.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="stack">
+    <div class="eyebrow">Timeline</div>
+    <h2>Phases</h2>
+  </div>
+  <div class="phases">
+    <div class="phase"><div class="when"><b>Phase 1</b>Week 1</div><div>Confirm details, collect photos and reviews, lock the brand (logo, colors, type)</div></div>
+    <div class="phase"><div class="when"><b>Phase 2</b>Week 1–2</div><div>Set up the Node.js repo, build shared components and the main site</div></div>
+    <div class="phase"><div class="when"><b>Phase 3</b>Week 2–3</div><div>Build both city sites, service pages, pricing and neighborhood pages</div></div>
+    <div class="phase"><div class="when"><b>Phase 4</b>Week 3</div><div>SEO pass: schema, sitemaps, redirects, speed testing, Google Search Console</div></div>
+    <div class="phase"><div class="when"><b>Phase 5</b>Week 4</div><div>Point DNS to the new sites, launch, update Google Business Profiles and directories</div></div>
+  </div>
+</section>
+
+<section style="border-bottom:0">
+  <div class="stack">
+    <div class="eyebrow">Next</div>
+    <h2>Questions for you</h2>
+  </div>
+  <ol class="q">
+    <li>Do you like the subdomain names <span class="host">virginiabeach.</span> and <span class="host">charleston.</span>, or prefer something shorter like <span class="host">vb.</span> and <span class="host">chs.</span>? The longer names help SEO a little.</li>
+    <li>Should we keep the beach house logo, refresh it, or design a new one? The life-ring mark in the mockup is a placeholder.</li>
+    <li>Should each city have its own Time To Pet sign-up link, or do both share one account?</li>
+    <li>Can we show prices on the site? Clear pricing usually converts better and helps SEO.</li>
+    <li>Is there a separate Charleston phone number, address, team or manager? We need one for its Google Business Profile.</li>
+    <li>Can we get the full-size originals of the dog photos on the current site, plus team photos and any Charleston reviews?</li>
+    <li>Where will it be hosted, and who controls the DNS for sittersbythesea.net?</li>
+  </ol>
+</section>
+
+</div>
