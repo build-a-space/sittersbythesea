@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import TextUs from '../components/TextUs.astro';
-import { SITE_KEY, MODE, prodUrl, pagePath } from '../lib/site.js';
+import { SITE_KEY, NOINDEX, prodUrl, pagePath } from '../lib/site.js';
 import { breadcrumbs } from '../lib/schema.js';
 
 interface Props {
@@ -28,7 +28,7 @@ const ld = crumbs ? [...schema, breadcrumbs(SITE_KEY, crumbs)] : schema;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {(noindex || MODE === 'demo') && <meta name="robots" content="noindex" />}
+    {(noindex || NOINDEX) && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#14234f" />
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="sitemap" href="/sitemap-index.xml" />

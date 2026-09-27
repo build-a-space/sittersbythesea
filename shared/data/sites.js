@@ -40,6 +40,10 @@ export const SITES = {
 //   demo  -> /virginia-beach/ (all three sites in one folder)
 export function siteOrigin(key, mode = process.env.SITE_MODE || 'prod') {
   const s = SITES[key];
+  // Staging or custom domains: ORIGIN_MAIN, ORIGIN_VB and ORIGIN_CHS override
+  // the production addresses, e.g. ORIGIN_MAIN=https://sitters.reviewour.site
+  const override = process.env[`ORIGIN_${key.toUpperCase()}`];
+  if (override && mode !== 'demo' && mode !== 'local') return override.replace(/\/$/, '');
   if (mode === 'demo') return 'https://demo.sittersbythesea.net';
   if (mode === 'local') {
     const port = process.env.PORT || 8080;

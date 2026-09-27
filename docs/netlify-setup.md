@@ -23,6 +23,33 @@ Repeat for each row in the table:
    variables** and add `SITE` with the value from the table.
 5. Deploy, then check the `*.netlify.app` preview link.
 
+## Staging on reviewour.site (before launch)
+
+To review the sites on staging addresses first, give each staging site its
+own domain in Netlify, for example:
+
+| Netlify site | Staging domain |
+| --- | --- |
+| main | `sitters.reviewour.site` |
+| vb | `sitters-vb.reviewour.site` |
+| chs | `sitters-chs.reviewour.site` |
+
+Then add these environment variables to **all three** Netlify sites (in
+addition to `SITE`), and redeploy:
+
+| Variable | Value |
+| --- | --- |
+| `ORIGIN_MAIN` | `https://sitters.reviewour.site` |
+| `ORIGIN_VB` | `https://sitters-vb.reviewour.site` |
+| `ORIGIN_CHS` | `https://sitters-chs.reviewour.site` |
+| `NOINDEX` | `true` |
+
+The sites then link to each other on the staging addresses, and `NOINDEX`
+keeps Google from indexing the staging copies.
+
+**At launch:** delete all four variables, add the real domains, and
+redeploy. The sites switch back to the `sittersbythesea.net` addresses.
+
 ## 2. Contact form (main site only)
 
 The contact form uses Netlify Forms, so there is nothing to install.

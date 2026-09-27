@@ -4,6 +4,8 @@ import { business } from '../data/business.js';
 
 export const SITE_KEY = process.env.SITE || 'main';
 export const MODE = process.env.SITE_MODE || 'prod';
+/** NOINDEX=true keeps staging copies out of search engines. */
+export const NOINDEX = process.env.NOINDEX === 'true' || MODE === 'demo';
 export const site = SITES[SITE_KEY];
 export const city = cities[SITE_KEY] || null;
 
