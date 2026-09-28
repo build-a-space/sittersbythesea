@@ -27,7 +27,7 @@ npm run demo         # one-folder preview of all three sites in demo/site
 
 ## Deploying
 
-The sites are hosted on Netlify as three sites from this one repo. See [docs/netlify-setup.md](docs/netlify-setup.md).
+The sites are hosted on Vercel as three projects from this one repo, currently on staging addresses at reviewour.site. See [docs/vercel-setup.md](docs/vercel-setup.md). (A Netlify setup is also documented in [docs/netlify-setup.md](docs/netlify-setup.md).)
 
 ## Where things live
 
